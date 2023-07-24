@@ -32,10 +32,10 @@ def panduan(gnum, bomb, bomb_min, bomb_max, warning):
         return 2
 
 #单人游戏函数
-def singleplayer():
+def singleplayer(bomb_min,bomb_max):
     #初始化
     os.system("cls")  # windows清屏
-    bomb_min, bomb_max = 10, 100
+    # bomb_min, bomb_max = 10, 100
     bomb = random.randint(bomb_min+1, bomb_max-1)
     gnum,n,re = 0, 1,0
     warning = 0
@@ -65,10 +65,10 @@ def singleplayer():
         n += 1
 
 #双人游戏函数
-def twoplayer():
+def twoplayer(bomb_min,bomb_max):
     # 初始化
     os.system("cls")  # windows清屏
-    bomb_min, bomb_max = 10, 100
+    # bomb_min, bomb_max = 10, 100
     bomb = random.randint(bomb_min + 1, bomb_max - 1)
     gnum1,gnum2, re1,re2, n = 0,0, 0,0,1
     warning_p1,warning_p2 = 0,0
@@ -124,10 +124,10 @@ def twoplayer():
         n += 1
 
 #与bot对战函数
-def playewithbot():
+def playewithbot(bomb_min,bomb_max):
     # 初始化
     os.system("cls")  # windows清屏
-    bomb_min, bomb_max = 10, 100
+    # bomb_min, bomb_max = 10, 100
     bomb = random.randint(bomb_min + 1, bomb_max - 1)
     gnum,gnumbot, re,rebot, n = 0,0, 0,0,1
     warning = 0
@@ -181,18 +181,22 @@ rule="""
         3.双人模式和bot对战模式，将轮流说数字，其中bot会自动说数字。
 """
 print("****欢迎来到数字炸弹游戏****",rule,"****祝你游戏愉快****\n")
+bomb_min, bomb_max = 10, 100
 while True:
     # 模式选择
-    gamemode = input("请选择游戏模式（1-单人，2-双人，3-与Bot对战，4-规则，Q/q-退出游戏）：")
+    gamemode = input("请选择游戏模式（1-单人，2-双人，3-与Bot对战，4-看规则，5-设置炸弹范围，Q/q-退出游戏）：")
     match gamemode:
         case "1":
-            singleplayer()
+            singleplayer(bomb_min,bomb_max)
         case "2":
-            twoplayer()
+            twoplayer(bomb_min,bomb_max)
         case "3":
-            playewithbot()
+            playewithbot(bomb_min,bomb_max)
         case "4":
             print(rule)
+        case "5":
+            bomb_min =shuru("设置下限（不包含）")
+            bomb_max=shuru("设置上限（不包含）")
         case "Q" | "q":
             sys.exit()
         case _:
